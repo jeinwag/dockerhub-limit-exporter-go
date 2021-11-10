@@ -9,4 +9,6 @@ RUN go build
 FROM scratch
 COPY --from=build-env /etc/ssl/certs /etc/ssl/certs
 COPY --from=build-env /src/dockerhub-limit-exporter-go/dockerhub-limit-exporter-go /bin/dockerhub-limit-exporter-go
+COPY --from=build-env /etc/passwd /etc/passwd
+USER nobody
 ENTRYPOINT ["/bin/dockerhub-limit-exporter-go"]
